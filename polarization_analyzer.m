@@ -4,7 +4,7 @@ clc;
 
 c = 10; %speed of EM wave
 lambda = 1; %wave length
-z = 0; %z=0 mesure from a point with time
+z = 0; %z=0 measure from a point with time
 T = lambda/c; % c = Lambda/T -> T = Lambda/c
 t = 0:T/100:4*T;% let time flow
 %Amplitudes
@@ -12,13 +12,13 @@ Ex = 1;
 Ey = 1;
 % px - py = phase difference
 px = 0;
-py = T/4;
+py = pi/4;
 
 omega = 2*pi*c/lambda; %2pi/T
 k = 2*pi/lambda;
 
-ex = real(Ex*exp( 1i*(omega*(t + px) - k*z ) ));
-ey = real(Ey*exp( 1i*(omega*(t + py) - k*z ) ));
+ex = real(Ex*exp( 1i*( omega*t - k*z + px ) ));
+ey = real(Ey*exp( 1i*( omega*t - k*z + py ) ));
 
 %figure(1),subplot(2,1,1),plot3(t,ex,t*0,'r',t,t*0,ey,'b',t,ex,ey,'g'),grid on,hold on;
 
@@ -67,18 +67,23 @@ for x = 0:1:360
 %     polarizer = [ 1 0
 %                  0 1i];
 
-%    output = polarizer_l*polarizer_w4*J;
+    output = polarizer_l*polarizer_w4*J;
     
-    a = polarizer_w4*J;
-    output = polarizer_l*a;
+%    a = polarizer_w4*J;
+%    output = polarizer_l*a;
 
     ex_o = real(exp( 1i*(omega*t - k*z ))*output(1));
     ey_o = real(exp( 1i*(omega*t - k*z ))*output(2));
 
+%     t = 0:T/100:4*T;
+%     figure(1),plot3(t,ex,t*0,'r',t,t*0,ey,'b',t,ex,ey,'g'),grid on,hold on;
+%     t = 7*T:T/100:11*T;
+%     figure(1),plot3(t,ex_o,t*0,'r',t,t*0,ey_o,'b',t,ex_o,ey_o,'g'),grid on,view(45,45),hold off;
+
     t = 0:T/100:4*T;
-    figure(1),plot3(t,ex,t*0,'r',t,t*0,ey,'b',t,ex,ey,'g'),grid on,hold on;
+    figure(1),plot3(t,ex,ey,'r'),grid on,hold on;
     t = 7*T:T/100:11*T;
-    figure(1),plot3(t,ex_o,t*0,'r',t,t*0,ey_o,'b',t,ex_o,ey_o,'g'),grid on,view(45,45),hold off;
+    figure(1),plot3(t,ex_o,ey_o,'r'),grid on,view(45,45),hold off;
 
     figure(2),plot(p_theta,(abs(output(1))^2+abs(output(2))^2)^0.5,'x'),hold on;
     

@@ -14,7 +14,7 @@ frames = 100;
 frameC = 0;
 
 f = figure('Position', get(0, 'Screensize'));
-filename = 'test.gif';
+filename = 'Images/wave.gif';
 
 while 1
     y1 = sin(2*pi*(t/T) + theta);

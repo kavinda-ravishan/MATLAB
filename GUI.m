@@ -99,14 +99,13 @@ Ex = 1;
 Ey = 1;
 % px - py = phase difference
 px = 0;
-py = T/4;
+py = 0;
 
 omega = 2*pi*c/lambda; %2pi/T
 k = 2*pi/lambda;
 
-
-ex = real(Ex*exp( 1i*(omega*(t + px) - k*z ) ));
-ey = real(Ey*exp( 1i*(omega*(t + py) - k*z ) ));
+ex = real(Ex*exp( 1i*( omega*t - k*z + px ) ));
+ey = real(Ey*exp( 1i*( omega*t - k*z + py ) ));
 
 plot3(t,ex,t*0,'r',t,t*0,ey,'b',t,ex,ey,'g'),grid on,view(45,45),hold on;
 

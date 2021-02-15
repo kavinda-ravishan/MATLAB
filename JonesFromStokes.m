@@ -59,6 +59,13 @@ for i=1:1:3
     s2 = 2*eox*eoy*cos(delta);
     s3 = 2*eox*eoy*sin(delta);
 
+    S = sqrt((s1^2)+(s2^2)+(s3^2));
+    
+    s0 = s0/S;
+    s1 = s1/S;
+    s2 = s2/S;
+    s3 = s3/S;
+    
     kval(i) = (sqrt(s0+s1)/sqrt(s0-s1))*exp(-1i*atan(s3/s2));
 end
 
@@ -68,4 +75,4 @@ Jnew = [kval(1)*kval(4) kval(2)
         kval(4)         1      ]
 
 
-optical_element/optical_element(4)
+optical_element/optical_element(4);
